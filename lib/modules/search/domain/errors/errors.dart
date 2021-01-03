@@ -12,3 +12,5 @@
 abstract class FailureSearch implements Exception {}
 
 class InvalidNameError implements FailureSearch {}
+
+class DataSourceError implements FailureSearch {}
