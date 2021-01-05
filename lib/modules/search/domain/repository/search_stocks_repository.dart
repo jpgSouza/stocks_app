@@ -14,6 +14,5 @@ import 'package:stocks_app/modules/search/domain/entities/result_search_stocks.d
 import 'package:stocks_app/modules/search/domain/errors/errors.dart';
 
 abstract class SearchStockRepository {
-  Future<Either<FailureSearch, List<ResultSearchStocks>>> search(
-      String stockName);
+  Future<Either<FailureSearch, ResultSearchStocks>> search(String stockName);
 }

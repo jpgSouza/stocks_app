@@ -12,5 +12,5 @@
 import 'package:stocks_app/modules/search/data/models/result_search_stock_model.dart';
 
 abstract class SearchStockDataSource {
-  Future<List<ResultSearchStockModel>> getSearch(String stockName);
+  Future<ResultSearchStockModel> getSearch(String stockName);
 }

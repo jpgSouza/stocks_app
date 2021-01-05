@@ -24,12 +24,12 @@ main() {
   final dataSource = SearchDataSourceMock();
   final repository = SearchStockRepositoryImpl(dataSource);
 
-  test('Should return a List of "ResultSearchStockModel"', () async {
+  test('Should return a "ResultSearchStockModel"', () async {
     when(dataSource.getSearch(any))
-        .thenAnswer((_) async => <ResultSearchStockModel>[]);
+        .thenAnswer((_) async => ResultSearchStockModel());
     final result = await repository.search("mglu3");
 
-    expect(result | null, isA<List<ResultSearchStockModel>>());
+    expect(result | null, isA<ResultSearchStockModel>());
   });
 
   test('Should return a DataSourceError', () async {
