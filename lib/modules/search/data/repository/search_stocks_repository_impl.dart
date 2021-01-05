@@ -21,7 +21,7 @@ class SearchStockRepositoryImpl implements SearchStockRepository {
   SearchStockRepositoryImpl(this.dataSource);
 
   @override
-  Future<Either<FailureSearch, List<ResultSearchStocks>>> search(
+  Future<Either<FailureSearch, ResultSearchStocks>> search(
       String stockName) async {
     try {
       final result = await dataSource.getSearch(stockName);

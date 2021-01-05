@@ -35,9 +35,8 @@ class ResultSearchStockModel extends ResultSearchStocks {
 
   factory ResultSearchStockModel.fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
-
     return ResultSearchStockModel(
-      name: map['name'],
+      name: map['longName'],
       type: map['type'],
       closure: map['closure'],
       opening: map['opening'],

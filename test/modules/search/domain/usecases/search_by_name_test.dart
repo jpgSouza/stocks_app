@@ -23,17 +23,17 @@ main() {
   final repository = SearchRepositoryMock();
   final usecase = SearchByNameImpl(repository);
 
-  test('Should return a List of type "ResultStocksSearch"', () async {
+  test('Should return a "ResultStocksSearch"', () async {
     when(repository.search(any))
-        .thenAnswer((_) async => Right(<ResultSearchStocks>[]));
+        .thenAnswer((_) async => Right(ResultSearchStocks()));
 
     final result = await usecase("mglu3");
-    expect(result | null, isA<List<ResultSearchStocks>>());
+    expect(result | null, isA<ResultSearchStocks>());
   });
 
   test('Should return an "InvalidNameError"', () async {
     when(repository.search(any))
-        .thenAnswer((_) async => Right(<ResultSearchStocks>[]));
+        .thenAnswer((_) async => Right(ResultSearchStocks()));
 
     var result = await usecase(null);
     expect(result.fold(id, id), isA<InvalidNameError>());
