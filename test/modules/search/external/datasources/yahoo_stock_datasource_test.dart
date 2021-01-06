@@ -24,11 +24,23 @@ main() {
   final dio = DioMock();
 
   final dataSource = YahooDataSource(dio);
-
   test('Should return a ResultSearchStockModel', () async {
     when(dio.get(any)).thenAnswer((_) async =>
         Response(data: jsonDecode(yahooResponse), statusCode: 200));
     final result = dataSource.getSearch("mglu3");
     expect(result, completes);
   });
+
+  test('Should return the correct reponse data', () async {
+    when(dio.get(any)).thenAnswer((_) async =>
+        Response(data: jsonDecode(yahooResponse), statusCode: 200));
+    final result = dataSource.getSearch("mglu3").then((value){
+      expect("Magazine Luiza S.A.", value.name);
+      expect("24,95", value.closure);
+      expect("0,00", value.opening);
+      expect("BRL", value.type);
+      expect("-1,22%", value.variation);
+    });
+  });
+
 }

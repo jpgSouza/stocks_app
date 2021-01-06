@@ -9,7 +9,9 @@
  * -----
  * Copyright (c) 2021 Your Company
  */
-import 'dart:math';
+
+
+import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:stocks_app/modules/search/data/datasource/search_stock_datasource.dart';
@@ -25,9 +27,8 @@ class YahooDataSource implements SearchStockDataSource {
     final response = await dio.get(
         "https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v2/get-profile?symbol=${stockName}.SA&region=BR");
     if (response.statusCode == 200) {
-      final data =
-          (response.data).map((e) => ResultSearchStockModel.fromMap(e));
-      return data;
+      final dataReponse = ResultSearchStockModel.fromMap(response.data["price"]);
+      return dataReponse;
     }
   }
 }

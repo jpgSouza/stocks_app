@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 /*
  * File: c:\Users\joao_\OneDrive\Documentos\Git Projects\stocks_app\lib\modules\search\data\models\result_search_stock_model.dart
  * Project: c:\Users\joao_\OneDrive\Documentos\Git Projects\stocks_app\lib\modules\search\data\models
@@ -12,13 +10,13 @@ import 'dart:convert';
  * Copyright (c) 2021 Your Company
  */
 import 'package:stocks_app/modules/search/domain/entities/result_search_stocks.dart';
-
+import 'dart:convert';
 class ResultSearchStockModel extends ResultSearchStocks {
   final String name;
   final String type;
-  final double closure;
-  final double opening;
-  final double variation;
+  final String closure;
+  final String opening;
+  final String variation;
 
   ResultSearchStockModel(
       {this.name, this.type, this.closure, this.opening, this.variation});
@@ -37,10 +35,10 @@ class ResultSearchStockModel extends ResultSearchStocks {
     if (map == null) return null;
     return ResultSearchStockModel(
       name: map['longName'],
-      type: map['type'],
-      closure: map['closure'],
-      opening: map['opening'],
-      variation: map['variation'],
+      type: map['currency'],
+      closure: map['regularMarketPrice']['fmt'],
+      opening: map['regularMarketOpen']['fmt'],
+      variation: map['regularMarketChangePercent']['fmt'],
     );
   }
 

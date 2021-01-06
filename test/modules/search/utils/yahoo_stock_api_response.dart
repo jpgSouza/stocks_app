@@ -10,7 +10,8 @@
  * Copyright (c) 2021 Your Company
  */
 
-const yahooResponse = """{
+const yahooResponse = """
+{
     "financialsTemplate": {
         "code": "N",
         "maxAge": 1
