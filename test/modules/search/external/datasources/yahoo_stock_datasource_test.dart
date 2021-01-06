@@ -34,7 +34,7 @@ main() {
   test('Should return the correct reponse data', () async {
     when(dio.get(any)).thenAnswer((_) async =>
         Response(data: jsonDecode(yahooResponse), statusCode: 200));
-    final result = dataSource.getSearch("mglu3").then((value){
+    dataSource.getSearch("mglu3").then((value){
       expect("Magazine Luiza S.A.", value.name);
       expect("24,95", value.closure);
       expect("0,00", value.opening);
