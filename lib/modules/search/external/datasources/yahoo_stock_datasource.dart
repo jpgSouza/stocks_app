@@ -29,6 +29,6 @@ class YahooDataSource implements SearchStockDataSource {
     if (response.statusCode == 200) {
       final dataReponse = ResultSearchStockModel.fromMap(response.data["price"]);
       return dataReponse;
-    }
+    } 
   }
 }
