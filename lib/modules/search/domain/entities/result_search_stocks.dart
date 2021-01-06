@@ -13,9 +13,9 @@
 class ResultSearchStocks {
   final String name;
   final String type;
-  final double closure;
-  final double opening;
-  final double variation;
+  final String closure;
+  final String opening;
+  final String variation;
 
   ResultSearchStocks(
       {this.name, this.type, this.closure, this.opening, this.variation});
