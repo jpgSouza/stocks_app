@@ -11,6 +11,9 @@
  */
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:stocks_app/modules/search/presenter/search/search_bloc.dart';
+import 'package:stocks_app/modules/search/presenter/search/states/state.dart';
 import 'package:stocks_app/modules/search/presenter/widgets/stocks_card_widget.dart';
 import 'package:stocks_app/utils/app_costants.dart';
 
@@ -20,6 +23,14 @@ class SearchStocksPage extends StatefulWidget {
 }
 
 class _SearchStocksPageState extends State<SearchStocksPage> {
+  final bloc = Modular.get<SearchBloc>();
+
+  @override
+  void dispose() {
+    super.dispose();
+    bloc.close();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,19 +50,49 @@ class _SearchStocksPageState extends State<SearchStocksPage> {
                       offset: AppConstant.kOffset)
                 ]),
             child: TextField(
+              onSubmitted: bloc.add,
               style: TextStyle(color: Colors.black38),
               keyboardType: TextInputType.text,
               decoration: InputDecoration(
-                contentPadding: AppConstant.kTextFieldContentPadding,
-                border: InputBorder.none,
-                suffixIcon: IconButton(icon: Icon(Icons.search), onPressed: (){}),
-                hintText: AppConstant.SEARCH_HINT_TEXT_FIELD,
-                hintStyle: TextStyle(color: Colors.grey)
-              ),
+                  contentPadding: AppConstant.kTextFieldContentPadding,
+                  border: InputBorder.none,
+                  suffixIcon:
+                      IconButton(icon: Icon(Icons.search), onPressed: (){}),
+                  hintText: AppConstant.SEARCH_HINT_TEXT_FIELD,
+                  hintStyle: TextStyle(color: Colors.grey)),
             ),
           ),
         ),
-        StocksCard()
+        StreamBuilder<Object>(
+            stream: bloc,
+            builder: (context, snapshot) {
+              final state = bloc.state;
+              if (state is SearchStart) {
+                return Container();
+              }
+              if (state is SearchFailure) {
+                return Center(child: Text("Houve um erro"));
+              }
+              if (state is SearchLoading) {
+                return Center(child: CircularProgressIndicator());
+              }
+              final data = (state as SearchSucess);
+              return SizedBox(
+                //height: 450.0,
+                child: ListView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                    itemCount: 1,
+                    itemBuilder: (_, __) {
+                      return StocksCard(
+                          name: data.resultSearchStocks.name,
+                          type: data.resultSearchStocks.type,
+                          closure: data.resultSearchStocks.closure,
+                          opening: data.resultSearchStocks.opening,
+                          variation: data.resultSearchStocks.variation);
+                    }),
+              );
+            })
       ]),
     );
   }

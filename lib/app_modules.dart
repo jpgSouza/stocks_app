@@ -15,17 +15,21 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:stocks_app/modules/search/data/repository/search_stocks_repository_impl.dart';
 import 'package:stocks_app/modules/search/domain/usecases/search_by_name.dart';
 import 'package:stocks_app/modules/search/external/datasources/yahoo_stock_datasource.dart';
+import 'package:stocks_app/modules/search/presenter/search/search_bloc.dart';
+import 'package:stocks_app/utils/api_constants.dart';
 
 import 'app_widget.dart';
 import 'modules/search/presenter/search/search_page.dart';
 
 class AppModule extends MainModule{
+
   @override
   List<Bind> get binds => [
     Bind((i) => Dio()),
     Bind((i) => SearchByNameImpl(i())),
     Bind((i) => YahooDataSource(i())),
     Bind((i) => SearchStockRepositoryImpl(i())),
+    Bind((i) => SearchBloc(i()))
   ];
 
   @override

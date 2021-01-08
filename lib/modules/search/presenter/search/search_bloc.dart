@@ -19,10 +19,10 @@ class SearchBloc extends Bloc<String, SearchState> {
   SearchBloc(this.usecase) : super(SearchStart());
 
   @override
-  Stream<SearchState> mapEventToState(String searchStockName) async*{
+  Stream<SearchState> mapEventToState(String searchStockName) async* {
     yield SearchLoading();
     final result = await usecase(searchStockName);
     yield result.fold((l) => SearchFailure(l), (r) => SearchSucess(r));
   }
-  
+
 }
