@@ -13,8 +13,8 @@
 class ResultSearchStocks {
   final String name;
   final String type;
-  final double closure;
-  final double opening;
+  final String closure;
+  final String opening;
   final double variation;
 
   ResultSearchStocks(

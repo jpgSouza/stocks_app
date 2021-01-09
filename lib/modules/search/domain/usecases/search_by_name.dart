@@ -15,8 +15,7 @@ import 'package:stocks_app/modules/search/domain/errors/errors.dart';
 import 'package:stocks_app/modules/search/domain/repository/search_stocks_repository.dart';
 
 abstract class SearchByName {
-  Future<Either<FailureSearch, List<ResultSearchStocks>>> call(
-      String stockName);
+  Future<Either<FailureSearch, ResultSearchStocks>> call(String stockName);
 }
 
 class SearchByNameImpl implements SearchByName {
@@ -25,7 +24,7 @@ class SearchByNameImpl implements SearchByName {
   SearchByNameImpl(this.searchStockRepository);
 
   @override
-  Future<Either<FailureSearch, List<ResultSearchStocks>>> call(
+  Future<Either<FailureSearch, ResultSearchStocks>> call(
       String stockName) async {
     if (stockName == null || stockName.isEmpty) {
       return Left(InvalidNameError());
