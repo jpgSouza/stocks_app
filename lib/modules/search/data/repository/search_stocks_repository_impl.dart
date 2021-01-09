@@ -27,6 +27,7 @@ class SearchStockRepositoryImpl implements SearchStockRepository {
       final result = await dataSource.getSearch(stockName);
       return Right(result);
     } catch (e) {
+      print(e);
       return Left(DataSourceError());
     }
   }

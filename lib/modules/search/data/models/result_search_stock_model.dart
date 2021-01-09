@@ -16,7 +16,7 @@ class ResultSearchStockModel extends ResultSearchStocks {
   final String type;
   final String closure;
   final String opening;
-  final String variation;
+  final double variation;
 
   ResultSearchStockModel(
       {this.name, this.type, this.closure, this.opening, this.variation});
@@ -38,7 +38,7 @@ class ResultSearchStockModel extends ResultSearchStocks {
       type: map['currency'],
       closure: map['regularMarketPrice']['fmt'],
       opening: map['regularMarketOpen']['fmt'],
-      variation: map['regularMarketChangePercent']['fmt'],
+      variation: map['regularMarketChangePercent']['raw'],
     );
   }
 

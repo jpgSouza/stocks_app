@@ -15,6 +15,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:stocks_app/modules/search/external/datasources/yahoo_stock_datasource.dart';
+import 'package:stocks_app/utils/api_constants.dart';
 
 import '../../utils/yahoo_stock_api_response.dart';
 

@@ -10,12 +10,12 @@
  * Copyright (c) 2021 Your Company
  */
 
-
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:stocks_app/modules/search/data/datasource/search_stock_datasource.dart';
 import 'package:stocks_app/modules/search/data/models/result_search_stock_model.dart';
+import 'package:stocks_app/utils/api_constants.dart';
 
 class YahooDataSource implements SearchStockDataSource {
   final Dio dio;
@@ -24,10 +24,11 @@ class YahooDataSource implements SearchStockDataSource {
 
   @override
   Future<ResultSearchStockModel> getSearch(String stockName) async {
-    final response = await dio.get(
-        "https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v2/get-profile?symbol=${stockName}.SA&region=BR");
+    final response = await dio.get("https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v2/get-profile?symbol=${stockName}.SA&region=BR",
+        options: Options(headers: {APIConstants.API_HEADER : APIConstants.API_KEY}));
     if (response.statusCode == 200) {
-      final dataReponse = ResultSearchStockModel.fromMap(response.data["price"]);
+      final dataReponse =
+          ResultSearchStockModel.fromMap(response.data["price"]);
       return dataReponse;
     }
   }
